@@ -1,4 +1,5 @@
 import express from "express";
+import eventQueue from "../configs/queue.config";
 
 const router = express.Router();
 
@@ -10,6 +11,13 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const payload = req?.body;
+  try {
+    await eventQueue("create_manufacturing_order", {
+      process: parseInt(Math.random() * 500, 10),
+    });
+  } catch (error) {
+    console.error("Event Emitter Fail", error);
+  }
   res.json({
     message: "Hello Create MO",
     payload,

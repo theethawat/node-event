@@ -1,22 +1,22 @@
 {
-  "name": "main",
+  "name": "database",
   "version": "1.0.0",
-  "description": "",
+  "description": "Demonstration as Database Server",
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon   --experimental-specifier-resolution=node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-db-task": "nodemon   --experimental-specifier-resolution=node databaseTask.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "zeromq": "^6.0.0-beta.16"
-  },
   "devDependencies": {
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "zeromq": "^6.0.0-beta.16"
   }
 }
