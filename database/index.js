@@ -8,7 +8,7 @@ dotenv.config({});
 const run = async () => {
   // prettier-ignore
   const sock = new zmq.Pull
-
+  let number = 1;
   sock.connect(process.env.SOCKET_SERVER);
   console.log("Database Queue Running at port ", process.env.SOCKET_SERVER);
 
@@ -22,7 +22,7 @@ const run = async () => {
     const taskName = dataPayload?.task;
     const payload = dataPayload?.payload;
 
-    await databaseEvents.emit(taskName, payload);
+    await databaseEvents.emit(taskName, { ...payload, number });
 
     console.log("----- Task End ---------");
   }

@@ -6,21 +6,30 @@ const databaseEvents = new EventEmitter();
 function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
+console.log("Database Task Active");
+let countingNumber = 1;
 
 const createManufacturingOrder = async (data) => {
   console.log("Start Transactions");
-  await delay(5000);
+
   console.log("Payload Data", data);
 
-  console.log("Create Process");
   for await (const eachProcess of [1, 2, 3, 4]) {
-    await delay(2000);
+    await delay(500);
     console.log("Create Process", eachProcess);
   }
 
-  console.log("Create Process Complete");
-  console.log(data?.process);
+  console.log("------Critical of --", data?.process, "----------");
+  await delay(500);
+  if (countingNumber % 2 == 0) {
+    countingNumber += parseInt(data?.number);
+  } else {
+    countingNumber += parseInt(data?.number);
+    countingNumber *= 2;
+  }
+  console.log("------End of Critical of --", data?.process, "----------");
   console.log("--------");
+  console.log("Number now", countingNumber);
   return { success: true };
 };
 
@@ -43,7 +52,5 @@ const updateDatabase = async (data) => {
 databaseEvents.on("create_manufacturing_order", createManufacturingOrder);
 
 databaseEvents.on("update_manufacturing_order", updateDatabase);
-
-console.log("Database Task Active");
 
 export default databaseEvents;
